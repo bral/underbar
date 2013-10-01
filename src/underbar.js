@@ -51,6 +51,8 @@ var _ = { };
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target){
+    
+  
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
@@ -58,21 +60,41 @@ var _ = { };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
+    var result = [];
+    for(var i = 0; i < collection.length; i++) {
+	    if(iterator(collection[i])) {
+		    result.push(collection[i]);
+	    }   
+    }
+    return result;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, iterator) {
+      var results = [];
+      for (var i = 0; i < collection.length; i++) {
+	      if(!iterator(collection[i])) {
+		      results.push(collection[i]);
+	      }
+      }
+      return results;
     // TIP: see if you can re-use _.select() here, without simply
     // copying code in and modifying it
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
   };
 
 
   // Return the results of applying an iterator to each element.
   _.map = function(array, iterator) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+	  result.push(iterator(array[i]));  
+    }
+    return result;
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
@@ -98,6 +120,7 @@ var _ = { };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
+    
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -114,6 +137,14 @@ var _ = { };
   //   }, 0); // should be 6
   //
   _.reduce = function(collection, iterator, initialValue) {
+    var total = initialValue;
+    if (initialValue == null) {
+	    total = 0;
+    }
+    for (var i = 0; i < collection.length; i++) {
+	  total = iterator(total, collection[i]);
+    }
+    return total;
   };
 
   // Determine if the array or object contains a given value (using `===`).
