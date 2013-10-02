@@ -120,7 +120,7 @@ describe("reject", function() {
 
 describe("uniq", function() {
   it("should return all unique values contained in an unsorted array", function() {
-    var list = [1, 2, 1, 3, 1, 4];
+    var list = [1, 2, 1, 3, 1, 4, 4];
     expect(_.uniq(list)).to.eql([1, 2, 3, 4]);
   });
 
