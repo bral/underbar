@@ -160,7 +160,14 @@ var _ = { };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
-
+    _.each(list, function(value) {
+	  if (typeof methodName == "string") {
+		value[methodName](args);
+	  } else {
+		methodName.apply(value, args);
+	  }
+    });
+    return list;
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -177,26 +184,39 @@ var _ = { };
   //   }, 0); // should be 6
   //
   _.reduce = function(collection, iterator, initialValue) {
-    var total = initialValue;
-    if (initialValue == null || initialValue == undefined) {
-	    total = 0;
+    
+    if (initialValue == null || initialValue == undefined){
+	  initialValue = 0;
     }
+    
+    var total = initialValue;
+
     for (var i = 0; i < collection.length; i++) {
 	  total = iterator(total, collection[i]);
     }
-    return total;
+    return total; 
+    
   };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
+    var answer = false
+    _.each(collection, function(value) {
+	  if (value === target) {
+		answer = true;
+	  }
+    });
+    return answer;
+    
     // TIP: Many iteration problems can be most easily expressed in
-    // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, function(wasFound, item) {
+    // terms of reduce(). Here's a freebie to demonstrate!  
+/*    return _.reduce(collection, function(wasFound, item) {
       if(wasFound) {
         return true;
       }
       return item === target;
     }, false);
+*/
   };
 
 
@@ -204,27 +224,35 @@ var _ = { };
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     var answer = true;
-    for (var i = 0; i < collection.length; i++) {
-	  if (typeof iterator == "function") {
-	    if (!iterator(collection[i])) {
-		  answer = false;
-	    };
-      } 
-	  if (collection[i]) {
-		answer = false
+    _.each(collection, function(value, index, collection){
+	  if (iterator == null || iterator == undefined) {
+		  if (!value) {
+			  answer = false;
+		  }
 	  }
-    }
-    return answer;    
+	  else if (!iterator(value)) {
+		answer = false;
+	  }
+    });
+    return answer;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-    if (!_.every(collection, iterator)) {
-	    return true;
-    }
-    return false;  
+    var answer = false;
+    _.each(collection, function(value, index, collection) {
+	  if (iterator == null || iterator == undefined) {
+		if (value) {
+		  answer = true;
+		}
+	  }
+	  else if (iterator(value)) {
+		answer = true
+	  }
+    });
+    return answer;
   };
 
 
