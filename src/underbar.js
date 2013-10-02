@@ -370,7 +370,7 @@ var _ = { };
   // Shuffle an array.
   _.shuffle = function(array) {
     
-    arr = array.slice(0);
+    var arr = array.slice(0);
     
     arr.sort(function() {
 	  return (Math.random() - 0.5);
