@@ -356,9 +356,12 @@ var _ = { };
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
     
-    var args = Array.prototype.slice.call(arguments, 2)
+    var args = Array.prototype.slice.call(arguments, 2);
     
-    return setTimeout(function(){func.apply(this, args)}, wait)
+    return setTimeout(function(){
+    	func.apply(this, args);
+    }, wait);
+  
   };
 
 
@@ -406,6 +409,13 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+		var result = [];
+		
+		arguments.sort(function(a, b){
+			a.length > b.length;
+		});
+		
+		console.log(arguments);		
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
@@ -413,6 +423,20 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+  	var result = [];
+  	
+  	function arrRec(arr){
+  		for(var i = 0; i < arr.length; i++){
+	  		if(Array.isArray(arr[i])){
+		  	  arrRec(arr[i]);
+				} else {
+					result.push(arr[i]);
+				}
+			}
+  	}
+  	arrRec(nestedArray);
+  	
+  	return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
