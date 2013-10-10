@@ -397,7 +397,7 @@ var _ = { };
 				return a.length > b.length;
 			});
 		}
-		return collection.sort(iterator);
+		return (collection.sort(iterator)).sort();
   };
 
   // Zip together two or more arrays with elements of the same index
