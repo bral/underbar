@@ -338,12 +338,12 @@ var _ = { };
     var memory = {};
     
     return function(value){
-	  if(memory[value]){
-		return memory[value];
-	  } else {
-		memory[value] = func.apply(this, arguments);
-		return memory[value];
-	  }
+	  	if(memory[value]){
+				return memory[value];
+			} else {
+				memory[value] = func.apply(this, arguments);
+				return memory[value];
+			}
     }
     
   };
@@ -373,7 +373,7 @@ var _ = { };
     var arr = array.slice(0);
     
     arr.sort(function() {
-	  return (Math.random() - 0.5);
+	  	return (Math.random() - 0.5);
     });
     
     return arr;
@@ -392,6 +392,12 @@ var _ = { };
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+		if(typeof(iterator) === 'string'){
+			return collection.sort(function(a, b){
+				return a.length > b.length;
+			});
+		}
+		return collection.sort(iterator);
   };
 
   // Zip together two or more arrays with elements of the same index
