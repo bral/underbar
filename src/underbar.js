@@ -423,10 +423,12 @@ var _ = { };
 		
 		for(var i = 0; i < args.length; i++){
 			for(var j = 0; j < longest; j++){
+				//If there is no array at the position, add one
 				if(result[j] === undefined){
 					temp.push(args[i][j]);
 					result.push(temp);
 					temp = [];
+				//Otherwise just push the value at the loop position	
 				} else {
 					result[j].push(args[i][j]);
 				}
@@ -460,6 +462,20 @@ var _ = { };
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+  	var args = Array.prototype.slice.call(arguments, 0);
+  	var result = [];
+  	var temp;
+  	
+  	for(var i = 0; i < args[0].length; i++){
+	  	temp = args[0][i];
+	  	if(!_.contains(args[i], temp)){
+		  	
+	  	} else {
+		  	result.push(temp);
+	  	}
+  	}
+  	
+  	return(result);
   };
 
   // Take the difference between one array and a number of other arrays.
