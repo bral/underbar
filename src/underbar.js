@@ -101,11 +101,12 @@ var _ = { };
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, iterator) {
       var results = [];
-      for (var i = 0; i < collection.length; i++) {
-	      if(!iterator(collection[i])) {
-		      results.push(collection[i]);
+      _.each(collection, function(value){
+	      if(!iterator(value)) {
+		      results.push(value);
 	      }
-      }
+      });
+      
       return results;
     // TIP: see if you can re-use _.select() here, without simply
     // copying code in and modifying it
@@ -114,12 +115,13 @@ var _ = { };
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     var result = [];
-    array = array.sort();
-    for (var i = 0; i < array.length; i++) {
-	  if (array[i] !== array[i +1]) {
-		result.push(array[i])
-	  }
-    }
+    
+    _.each(array, function(value, index){
+	  	if (!_.contains(result, value)) {
+				result.push(value)
+			}
+    });
+    
     return result;
   };
 
@@ -128,7 +130,7 @@ var _ = { };
   _.map = function(array, iterator) {
     var result = [];
     
-    _.each(array, function(value, index, array) {
+    _.each(array, function(value) {
 	    result.push(iterator(value))
     });
     
@@ -189,15 +191,17 @@ var _ = { };
   //
   _.reduce = function(collection, iterator, initialValue) {
     
-    if (initialValue == null || initialValue == undefined){
-	  initialValue = 0;
+    //Set initial value to 0 is it is null or undefined
+    if (initialValue === null || initialValue === undefined){
+	  	initialValue = 0;
     }
     
     var total = initialValue;
 
-    for (var i = 0; i < collection.length; i++) {
-	  total = iterator(total, collection[i]);
-    }
+    _.each(collection, function(value){
+	    total = iterator(total, value);
+    });
+    
     return total; 
     
   };
@@ -205,13 +209,15 @@ var _ = { };
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
     var answer = false
-    _.each(collection, function(value) {
-	  if (value === target) {
-		answer = true;
-	  }
-    });
-    return answer;
     
+    _.each(collection, function(value) {
+	  	if (value === target) {
+				answer = true;
+			}
+    });
+    
+    return answer;
+  };
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!  
 /*    return _.reduce(collection, function(wasFound, item) {
@@ -221,23 +227,23 @@ var _ = { };
       return item === target;
     }, false);
 */
-  };
 
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     var answer = true;
+        
     _.each(collection, function(value, index, collection){
-	  if (iterator == null || iterator == undefined) {
-		  if (!value) {
-			  answer = false;
-		  }
-	  }
-	  else if (!iterator(value)) {
-		answer = false;
-	  }
+	  	if (iterator == null || iterator == undefined) {
+		  	if (!value) {
+			  	answer = false;
+				}
+			} else if (!iterator(value)) {
+				answer = false;
+			}
     });
+    
     return answer;
   };
 
@@ -246,16 +252,17 @@ var _ = { };
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     var answer = false;
+    
     _.each(collection, function(value, index, collection) {
-	  if (iterator == null || iterator == undefined) {
-		if (value) {
-		  answer = true;
-		}
-	  }
-	  else if (iterator(value)) {
-		answer = true
-	  }
+	  	if (iterator == null || iterator == undefined) {
+				if (value) {
+					answer = true;
+				}
+			} else if (iterator(value)) {
+				answer = true
+			}
     });
+    
     return answer;
   };
 
@@ -280,10 +287,10 @@ var _ = { };
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
     for (var i = 1; i < arguments.length; i++) {
-	  _.each(arguments[i], function(value, key) {
-		 obj[key] = value;
-	  })
-    }
+			_.each(arguments[i], function(value, key) {
+				obj[key] = value;
+			})
+		}
     return obj;
   };
 
@@ -291,12 +298,13 @@ var _ = { };
   // exists in obj
   _.defaults = function(obj) {
     for (var i =1; i < arguments.length; i++) {
-	  _.each(arguments[i], function(value, key) {
-		if(!(key in obj)) {
-	      obj[key] = value;
-		}
-	  })
+	  	_.each(arguments[i], function(value, key) {
+				if(!(key in obj)) {
+	     		obj[key] = value;
+			 	}
+			})
     }
+    
     return obj;
   };
 
