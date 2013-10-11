@@ -37,29 +37,33 @@ var _ = { };
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
-  	  if(Array.isArray(collection)) {
+  	if(Array.isArray(collection)) {
 	    for(var i = 0; i < collection.length; i++) {
 		    iterator(collection[i], i, collection);
 	    }
-  	  } else {
-	  	  for(var key in collection) {
+  	} else {
+	  	for(var key in collection) {
 		  	iterator(collection[key], key, collection);  
-	  	  }
-  	  }
+	  	}
+  	}
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target){
-    var result;
+    var result = [];
+    _.each(array, function(value, index) {
+      if (value === target){
+      	result.push(index);
+			}
+    })
     
-    _.each(array, function(value, index, collection) {
-	  if(target === value) {
-		  result = result || index;
-	  }
-    });
-    
-    return result || -1;
+    if (result.length) {
+      return result[0];
+    } else {
+      return -1;
+    }
+  };
     
 /*    for (var i = 0; i < array.length; i++) {
 	  if (array[i] === target) {
@@ -71,16 +75,16 @@ var _ = { };
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
-  };
+
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
     var result = [];
     
-    _.each(collection, function(value, index, collection) {
-	  if(iterator(value)) {
+    _.each(collection, function(value) {
+	  	if(iterator(value)) {
         result.push(value);
-	  }
+			}
     });
     return result;
     
@@ -468,8 +472,7 @@ var _ = { };
   	
   	for(var i = 0; i < args[0].length; i++){
 	  	temp = args[0][i];
-	  	if(!_.contains(args[i], temp)){
-		  	
+	  	if(!_.contains(args[i], temp)){	
 	  	} else {
 		  	result.push(temp);
 	  	}
@@ -481,7 +484,26 @@ var _ = { };
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
-  };
+  	var args = Array.prototype.slice.call(arguments, 1);
+		var result = array.slice(0);
+		
+	 function check(arr){
+		 _.each(arr, function(value){
+			 if(Array.isArray(value)){
+				 check(value);
+			 } else {
+				 if(_.contains(result, value)){
+					 var indx = _.indexOf(result, value);
+					 result.splice(indx, 1);
+				 }
+			 }			 
+		 });
+	 }
+	 
+	 check(args); 
+	  	  
+	 return result;
+ };
 
 
   /**

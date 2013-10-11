@@ -65,9 +65,9 @@ describe("each", function() {
 describe("indexOf", function() {
 
   it("should be able to compute indexOf even when the native function is undefined", function() {
-    var numbers = [1, 2, 3];
+    var numbers = [1, 2, 3, 4];
     numbers.indexOf = null;
-    expect(_.indexOf(numbers, 2)).to.be(1);
+    expect(_.indexOf(numbers, 1)).to.be(0);
   });
 
   it("should not have 35 in the list", function() {
