@@ -16,7 +16,11 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
+<<<<<<< HEAD
     if (n === undefined) {
+=======
+    if (n === undefined){
+>>>>>>> 4dc83f2e13c73ea49eb8afa1e9648d728dd72afc
       return array[0];
     }
     return array.slice(0,n);
@@ -25,10 +29,17 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+<<<<<<< HEAD
     if (n === undefined) {
       return array.pop();
     }
     if(n > array.length) {
+=======
+    if (n === undefined){
+      return array.pop();
+    }
+    if (n > array.length){
+>>>>>>> 4dc83f2e13c73ea49eb8afa1e9648d728dd72afc
       return array;
     }
     return array.slice(array.length - n);
@@ -39,11 +50,19 @@ var _ = { };
   _.each = function(collection, iterator) {
     if(Array.isArray(collection)) {
       for(var i = 0; i < collection.length; i++) {
+<<<<<<< HEAD
         iterator(collection[i], i, collection);
       }
     } else {
       for(var key in collection) {
         iterator(collection[key], key, collection);  
+=======
+	iterator(collection[i], i, collection);
+      }
+    } else {
+        for(var key in collection) {
+          iterator(collection[key], key, collection);  
+>>>>>>> 4dc83f2e13c73ea49eb8afa1e9648d728dd72afc
       }
     }
   };
