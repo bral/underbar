@@ -16,11 +16,7 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
-<<<<<<< HEAD
     if (n === undefined) {
-=======
-    if (n === undefined){
->>>>>>> 4dc83f2e13c73ea49eb8afa1e9648d728dd72afc
       return array[0];
     }
     return array.slice(0,n);
@@ -29,17 +25,11 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-<<<<<<< HEAD
     if (n === undefined) {
       return array.pop();
     }
-    if(n > array.length) {
-=======
-    if (n === undefined){
-      return array.pop();
-    }
-    if (n > array.length){
->>>>>>> 4dc83f2e13c73ea49eb8afa1e9648d728dd72afc
+    if (n > array.length) {
+
       return array;
     }
     return array.slice(array.length - n);
@@ -48,21 +38,13 @@ var _ = { };
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
-    if(Array.isArray(collection)) {
-      for(var i = 0; i < collection.length; i++) {
-<<<<<<< HEAD
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
       }
     } else {
-      for(var key in collection) {
+      for (var key in collection) {
         iterator(collection[key], key, collection);  
-=======
-	iterator(collection[i], i, collection);
-      }
-    } else {
-        for(var key in collection) {
-          iterator(collection[key], key, collection);  
->>>>>>> 4dc83f2e13c73ea49eb8afa1e9648d728dd72afc
       }
     }
   };
@@ -72,7 +54,7 @@ var _ = { };
   _.indexOf = function(array, target){
     var result = [];
     _.each(array, function(value, index) {
-      if (value === target){
+      if (value === target) {
         result.push(index);
       }
     })
@@ -101,7 +83,7 @@ var _ = { };
     var result = [];
     
     _.each(collection, function(value) {
-      if(iterator(value)) {
+      if (iterator(value)) {
         result.push(value);
       }
     });
@@ -120,8 +102,8 @@ var _ = { };
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, iterator) {
       var results = [];
-      _.each(collection, function(value){
-        if(!iterator(value)) {
+      _.each(collection, function(value) {
+        if (!iterator(value)) {
           results.push(value);
         }
       });
@@ -318,7 +300,7 @@ var _ = { };
   _.defaults = function(obj) {
     for (var i =1; i < arguments.length; i++) {
       _.each(arguments[i], function(value, key) {
-        if(!(key in obj)) {
+        if (!(key in obj)) {
           obj[key] = value;
         }
       })
@@ -347,7 +329,7 @@ var _ = { };
     // TIP: We'll return a new function that delegates to the old one, but only
     // if it hasn't been called before.
     return function(){
-      if(!alreadyCalled){
+      if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
         // infromation from one function call to another.
         result = func.apply(this, arguments);
@@ -368,8 +350,8 @@ var _ = { };
     
     var memory = {};
     
-    return function(value){
-      if(memory[value]){
+    return function(value) {
+      if (memory[value]) {
         return memory[value];
       } else {
         memory[value] = func.apply(this, arguments);
@@ -389,7 +371,7 @@ var _ = { };
     
     var args = Array.prototype.slice.call(arguments, 2);
     
-    return setTimeout(function(){
+    return setTimeout(function() {
       func.apply(this, args);
     }, wait);
   
@@ -426,8 +408,8 @@ var _ = { };
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-    if(typeof(iterator) === 'string'){
-      return collection.sort(function(a, b){
+    if (typeof(iterator) === 'string') {
+      return collection.sort(function(a, b) {
         return a.length > b.length;
       });
     }
@@ -446,16 +428,16 @@ var _ = { };
     var longest = 0;
         
     //Set var longest to the length of the longest array
-    for(var i = 0; i < args.length; i++){
-      if(args[i].length > longest){
+    for (var i = 0; i < args.length; i++) {
+      if (args[i].length > longest) {
         longest = args[i].length;
       } 
     }
     
-    for(var i = 0; i < args.length; i++){
-      for(var j = 0; j < longest; j++){
+    for (var i = 0; i < args.length; i++) {
+      for (var j = 0; j < longest; j++) {
         //If there is no array at the position, add one
-        if(result[j] === undefined){
+        if (result[j] === undefined) {
           temp.push(args[i][j]);
           result.push(temp);
           temp = [];
@@ -477,8 +459,8 @@ var _ = { };
     var result = [];
     
     function arrRec(arr){
-      for(var i = 0; i < arr.length; i++){
-        if(Array.isArray(arr[i])){
+      for (var i = 0; i < arr.length; i++){
+        if (Array.isArray(arr[i])){
           arrRec(arr[i]);
         } else {
           result.push(arr[i]);
@@ -497,9 +479,9 @@ var _ = { };
     var result = [];
     var temp;
     
-    for(var i = 0; i < args[0].length; i++){
+    for (var i = 0; i < args[0].length; i++) {
       temp = args[0][i];
-      if(!_.contains(args[i], temp)){ 
+      if (!_.contains(args[i], temp)) { 
       } else {
         result.push(temp);
       }
