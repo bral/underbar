@@ -28,7 +28,7 @@ var _ = { };
     if (n === undefined){
       return array.pop();
     }
-    if (n > array.length) {
+    if (n > array.length){
       return array;
     }
     return array.slice(array.length - n);
