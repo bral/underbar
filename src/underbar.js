@@ -16,8 +16,8 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
-    if(n === undefined){
-	    return array[0];
+    if (n === undefined) {
+      return array[0];
     }
     return array.slice(0,n);
   };
@@ -25,11 +25,11 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if(n === undefined){
-	    return array.pop();
+    if (n === undefined) {
+      return array.pop();
     }
     if(n > array.length) {
-	    return array;
+      return array;
     }
     return array.slice(array.length - n);
   };
@@ -37,15 +37,15 @@ var _ = { };
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
-  	if(Array.isArray(collection)) {
-	    for(var i = 0; i < collection.length; i++) {
-		    iterator(collection[i], i, collection);
-	    }
-  	} else {
-	  	for(var key in collection) {
-		  	iterator(collection[key], key, collection);  
-	  	}
-  	}
+    if(Array.isArray(collection)) {
+      for(var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      for(var key in collection) {
+        iterator(collection[key], key, collection);  
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -54,8 +54,8 @@ var _ = { };
     var result = [];
     _.each(array, function(value, index) {
       if (value === target){
-      	result.push(index);
-			}
+        result.push(index);
+      }
     })
     
     if (result.length) {
@@ -66,9 +66,9 @@ var _ = { };
   };
     
 /*    for (var i = 0; i < array.length; i++) {
-	  if (array[i] === target) {
-		  return i;
-	  }
+    if (array[i] === target) {
+      return i;
+    }
     }
     return -1; */
     
@@ -82,16 +82,16 @@ var _ = { };
     var result = [];
     
     _.each(collection, function(value) {
-	  	if(iterator(value)) {
+      if(iterator(value)) {
         result.push(value);
-			}
+      }
     });
     return result;
     
 /*    for(var i = 0; i < collection.length; i++) {
-	    if(iterator(collection[i])) {
-		    result.push(collection[i]);
-	    }   
+      if(iterator(collection[i])) {
+        result.push(collection[i]);
+      }   
     }
     return result; */
     
@@ -102,9 +102,9 @@ var _ = { };
   _.reject = function(collection, iterator) {
       var results = [];
       _.each(collection, function(value){
-	      if(!iterator(value)) {
-		      results.push(value);
-	      }
+        if(!iterator(value)) {
+          results.push(value);
+        }
       });
       
       return results;
@@ -117,9 +117,9 @@ var _ = { };
     var result = [];
     
     _.each(array, function(value, index){
-	  	if (!_.contains(result, value)) {
-				result.push(value)
-			}
+      if (!_.contains(result, value)) {
+        result.push(value)
+      }
     });
     
     return result;
@@ -131,13 +131,13 @@ var _ = { };
     var result = [];
     
     _.each(array, function(value) {
-	    result.push(iterator(value))
+      result.push(iterator(value))
     });
     
     return result;
     
 /*    for (var i = 0; i < array.length; i++) {
-	  result.push(iterator(array[i]));  
+    result.push(iterator(array[i]));  
     }
     return result; */
     
@@ -167,11 +167,11 @@ var _ = { };
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
     _.each(list, function(value) {
-	  if (typeof methodName == "string") {
-		value[methodName](args);
-	  } else {
-		methodName.apply(value, args);
-	  }
+    if (typeof methodName == "string") {
+    value[methodName](args);
+    } else {
+    methodName.apply(value, args);
+    }
     });
     return list;
   };
@@ -193,13 +193,13 @@ var _ = { };
     
     //Set initial value to 0 is it is null or undefined
     if (initialValue === null || initialValue === undefined){
-	  	initialValue = 0;
+      initialValue = 0;
     }
     
     var total = initialValue;
 
     _.each(collection, function(value){
-	    total = iterator(total, value);
+      total = iterator(total, value);
     });
     
     return total; 
@@ -211,9 +211,9 @@ var _ = { };
     var answer = false
     
     _.each(collection, function(value) {
-	  	if (value === target) {
-				answer = true;
-			}
+      if (value === target) {
+        answer = true;
+      }
     });
     
     return answer;
@@ -235,13 +235,13 @@ var _ = { };
     var answer = true;
         
     _.each(collection, function(value, index, collection){
-	  	if (iterator == null || iterator == undefined) {
-		  	if (!value) {
-			  	answer = false;
-				}
-			} else if (!iterator(value)) {
-				answer = false;
-			}
+      if (iterator == null || iterator == undefined) {
+        if (!value) {
+          answer = false;
+        }
+      } else if (!iterator(value)) {
+        answer = false;
+      }
     });
     
     return answer;
@@ -254,13 +254,13 @@ var _ = { };
     var answer = false;
     
     _.each(collection, function(value, index, collection) {
-	  	if (iterator == null || iterator == undefined) {
-				if (value) {
-					answer = true;
-				}
-			} else if (iterator(value)) {
-				answer = true
-			}
+      if (iterator == null || iterator == undefined) {
+        if (value) {
+          answer = true;
+        }
+      } else if (iterator(value)) {
+        answer = true
+      }
     });
     
     return answer;
@@ -287,10 +287,10 @@ var _ = { };
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
     for (var i = 1; i < arguments.length; i++) {
-			_.each(arguments[i], function(value, key) {
-				obj[key] = value;
-			})
-		}
+      _.each(arguments[i], function(value, key) {
+        obj[key] = value;
+      })
+    }
     return obj;
   };
 
@@ -298,11 +298,11 @@ var _ = { };
   // exists in obj
   _.defaults = function(obj) {
     for (var i =1; i < arguments.length; i++) {
-	  	_.each(arguments[i], function(value, key) {
-				if(!(key in obj)) {
-	     		obj[key] = value;
-			 	}
-			})
+      _.each(arguments[i], function(value, key) {
+        if(!(key in obj)) {
+          obj[key] = value;
+        }
+      })
     }
     
     return obj;
@@ -350,12 +350,12 @@ var _ = { };
     var memory = {};
     
     return function(value){
-	  	if(memory[value]){
-				return memory[value];
-			} else {
-				memory[value] = func.apply(this, arguments);
-				return memory[value];
-			}
+      if(memory[value]){
+        return memory[value];
+      } else {
+        memory[value] = func.apply(this, arguments);
+        return memory[value];
+      }
     }
     
   };
@@ -371,7 +371,7 @@ var _ = { };
     var args = Array.prototype.slice.call(arguments, 2);
     
     return setTimeout(function(){
-    	func.apply(this, args);
+      func.apply(this, args);
     }, wait);
   
   };
@@ -388,7 +388,7 @@ var _ = { };
     var arr = array.slice(0);
     
     arr.sort(function() {
-	  	return (Math.random() - 0.5);
+      return (Math.random() - 0.5);
     });
     
     return arr;
@@ -407,12 +407,12 @@ var _ = { };
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-		if(typeof(iterator) === 'string'){
-			return collection.sort(function(a, b){
-				return a.length > b.length;
-			});
-		}
-		return (collection.sort(iterator)).sort();
+    if(typeof(iterator) === 'string'){
+      return collection.sort(function(a, b){
+        return a.length > b.length;
+      });
+    }
+    return (collection.sort(iterator)).sort();
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -421,33 +421,33 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
-  	var args = Array.prototype.slice.call(arguments, 0);
-  	var result = [];
-	  var temp = [];
-	  var longest = 0;
-	  		
-		//Set var longest to the length of the longest array
-		for(var i = 0; i < args.length; i++){
-			if(args[i].length > longest){
-				longest = args[i].length;
-			}	
-		}
-		
-		for(var i = 0; i < args.length; i++){
-			for(var j = 0; j < longest; j++){
-				//If there is no array at the position, add one
-				if(result[j] === undefined){
-					temp.push(args[i][j]);
-					result.push(temp);
-					temp = [];
-				//Otherwise just push the value at the loop position	
-				} else {
-					result[j].push(args[i][j]);
-				}
-			}
-		}
-		
-		return(result);
+    var args = Array.prototype.slice.call(arguments, 0);
+    var result = [];
+    var temp = [];
+    var longest = 0;
+        
+    //Set var longest to the length of the longest array
+    for(var i = 0; i < args.length; i++){
+      if(args[i].length > longest){
+        longest = args[i].length;
+      } 
+    }
+    
+    for(var i = 0; i < args.length; i++){
+      for(var j = 0; j < longest; j++){
+        //If there is no array at the position, add one
+        if(result[j] === undefined){
+          temp.push(args[i][j]);
+          result.push(temp);
+          temp = [];
+        //Otherwise just push the value at the loop position  
+        } else {
+          result[j].push(args[i][j]);
+        }
+      }
+    }
+    
+    return(result);
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
@@ -455,62 +455,62 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
-  	var result = [];
-  	
-  	function arrRec(arr){
-  		for(var i = 0; i < arr.length; i++){
-	  		if(Array.isArray(arr[i])){
-		  	  arrRec(arr[i]);
-				} else {
-					result.push(arr[i]);
-				}
-			}
-  	}
-  	arrRec(nestedArray);
-  	
-  	return result;
+    var result = [];
+    
+    function arrRec(arr){
+      for(var i = 0; i < arr.length; i++){
+        if(Array.isArray(arr[i])){
+          arrRec(arr[i]);
+        } else {
+          result.push(arr[i]);
+        }
+      }
+    }
+    arrRec(nestedArray);
+    
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
-  	var args = Array.prototype.slice.call(arguments, 0);
-  	var result = [];
-  	var temp;
-  	
-  	for(var i = 0; i < args[0].length; i++){
-	  	temp = args[0][i];
-	  	if(!_.contains(args[i], temp)){	
-	  	} else {
-		  	result.push(temp);
-	  	}
-  	}
-  	
-  	return(result);
+    var args = Array.prototype.slice.call(arguments, 0);
+    var result = [];
+    var temp;
+    
+    for(var i = 0; i < args[0].length; i++){
+      temp = args[0][i];
+      if(!_.contains(args[i], temp)){ 
+      } else {
+        result.push(temp);
+      }
+    }
+    
+    return(result);
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
-  	var args = Array.prototype.slice.call(arguments, 1);
-		var result = array.slice(0);
-		
-	 function check(arr){
-		 _.each(arr, function(value){
-			 if(Array.isArray(value)){
-				 check(value);
-			 } else {
-				 if(_.contains(result, value)){
-					 var indx = _.indexOf(result, value);
-					 result.splice(indx, 1);
-				 }
-			 }			 
-		 });
-	 }
-	 
-	 check(args); 
-	  	  
-	 return result;
+    var args = Array.prototype.slice.call(arguments, 1);
+    var result = array.slice(0);
+    
+   function check(arr){
+     _.each(arr, function(value){
+       if(Array.isArray(value)){
+         check(value);
+       } else {
+         if(_.contains(result, value)){
+           var indx = _.indexOf(result, value);
+           result.splice(indx, 1);
+         }
+       }       
+     });
+   }
+   
+   check(args); 
+        
+   return result;
  };
 
 
